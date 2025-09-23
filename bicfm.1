@@ -1,0 +1,83 @@
+.\" Manpage for bicfm
+.TH BICFM 1 "September 2025" "BICFM" "User Commands"
+.SH NAME
+bicfm \- Binary Integrity & Control Flow Monitor
+.SH SYNOPSIS
+.B bicfm
+[\fI--db /path/to/db.json\fR] init \fIdir\fR
+.br
+.B bicfm
+[\fI--db /path/to/db.json\fR] scan \fIfile\fR
+.br
+.B bicfm
+[\fI--db /path/to/db.json\fR] scan-dir \fIdir\fR
+.br
+.B bicfm
+[\fI--db /path/to/db.json\fR] show \fIfile\fR
+.br
+.B bicfm
+\fI--help\fR \fI--version\fR
+.SH DESCRIPTION
+bicfm is a lightweight CLI utility to build and verify a baseline for ELF binaries.
+It stores a human-readable JSON baseline containing SHA256, size, section names/sizes
+and basic compiler metadata. Use bicfm to detect tampering (hash mismatch), structural
+anomalies (section additions/removals/size changes), or metadata changes.
+.SH COMMANDS
+.TP
+.B init \fIdir\fR
+Scan \fIdir\fR recursively for ELF binaries and build a baseline. The baseline is
+saved to the JSON file specified by \fI--db\fR (default: \fI./bicfm_db.json\fR).
+.TP
+.B scan \fIfile\fR
+Check a single binary against the baseline. Output is color-coded:
+green = OK, yellow = Suspicious, red = Violation, blue = Info.
+.TP
+.B scan-dir \fIdir\fR
+Scan all ELF binaries under \fIdir\fR and print per-file results plus a summary at the end.
+.TP
+.B show \fIfile\fR
+Display baseline information for the specified file (path, realpath, sha256, size, sections, compiler).
+.SH OPTIONS
+.TP
+.B --db \fIpath\fR
+Path to baseline JSON file. If omitted the tool uses \fI./bicfm_db.json\fR.
+.TP
+.B --help
+Show help and usage summary.
+.TP
+.B --version
+Show version information.
+.SH EXIT STATUS
+The bicfm commands return 0 on success, non-zero on error or misconfiguration.
+.SH EXAMPLES
+.TP
+Create baseline for /bin (default DB created in current directory):
+.br
+.nf
+$ ./bicfm.py init /bin
+.fi
+.TP
+Scan a single binary:
+.br
+.nf
+$ ./bicfm.py scan /bin/ls
+.fi
+.TP
+Use a specific DB:
+.br
+.nf
+$ ./bicfm.py --db /var/lib/bicfm/db.json init /usr/bin
+$ ./bicfm.py --db /var/lib/bicfm/db.json scan /usr/bin/ls
+.fi
+.SH FILES
+.TP
+.B bicfm_db.json
+Default baseline JSON file written to current directory unless \fI--db\fR is used.
+.SH NOTES
+- The tool is ELF-specific (Linux). It uses the ELF magic bytes to detect ELF files.
+- For scanning system directories you may need to run the \fIinit\fR command with root (sudo) privileges.
+.SH AUTHOR
+Software Security Lab (HPRCSE Group) \- template adapted for Lab05
+.SH SEE ALSO
+readelf(1), sha256sum(1), objdump(1)
+
