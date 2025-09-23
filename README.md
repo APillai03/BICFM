@@ -139,23 +139,19 @@ Each entry keyed by the binary's `realpath` and contains:
 
 ---
 
-## Placeholders for images (replace `1` with `2`, `3`, `4`, ... for each image)
-Place your screenshots in the `images/` folder and use these placeholders in the README/report. Replace `1` with the appropriate image number for each figure.
-
 ![Init baseline screenshot](images/1.png)
-*Figure 1: `bicfm init /bin` output (screenshot placeholder)*
-
+*Figure 1: `bicfm init /home/kali/Lab` output
 ![Scan single binary - OK](images/2.png)
-*Figure 2: `bicfm scan /bin/ls` showing an OK result (screenshot placeholder)*
+*Figure 2: `bicfm scan /home/kali/Lab/Lab02/chat_server` showing an OK result 
 
 ![Scan single binary - Violation](images/3.png)
-*Figure 3: `bicfm scan /bin/cp` showing a VIOLATION (screenshot placeholder)*
+*Figure 3: `bicfm scan /home/kali/Lab/Lab02/chat_server` showing a VIOLATION 
 
 ![Scan-dir summary](images/4.png)
-*Figure 4: `bicfm scan-dir /bin` summary (screenshot placeholder)*
+*Figure 4: `bicfm scan-dir /home/kali/Lab` summary 
 
 ![Show baseline](images/5.png)
-*Figure 5: `bicfm show /bin/ls` output (screenshot placeholder)*
+*Figure 5: `bicfm show /home/kali/Lab/Lab02/chat_server` 
 
 
 ---
