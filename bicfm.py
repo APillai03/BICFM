@@ -149,9 +149,6 @@ def cmd_init(args):
     return 0
 
 def check_against_db(path, db):
-    """
-    Returns (status, message). status in: OK, SUSPICIOUS, VIOLATION, MISSING
-    """
     real = os.path.realpath(path)
     if real not in db:
         return "MISSING", "Not found in baseline"
