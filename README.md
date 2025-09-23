@@ -142,7 +142,6 @@ Each entry keyed by the binary's `realpath` and contains:
 ## Placeholders for images (replace `1` with `2`, `3`, `4`, ... for each image)
 Place your screenshots in the `images/` folder and use these placeholders in the README/report. Replace `1` with the appropriate image number for each figure.
 
-```markdown
 ![Init baseline screenshot](images/1.png)
 *Figure 1: `bicfm init /bin` output (screenshot placeholder)*
 
@@ -158,7 +157,6 @@ Place your screenshots in the `images/` folder and use these placeholders in the
 ![Show baseline](images/5.png)
 *Figure 5: `bicfm show /bin/ls` output (screenshot placeholder)*
 
-```
 
 ---
 
