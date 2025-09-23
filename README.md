@@ -143,19 +143,19 @@ Each entry keyed by the binary's `realpath` and contains:
 Place your screenshots in the `images/` folder and use these placeholders in the README/report. Replace `1` with the appropriate image number for each figure.
 
 ```markdown
-![Init baseline screenshot](/images/1.png)
+![Init baseline screenshot](images/1.png)
 *Figure 1: `bicfm init /bin` output (screenshot placeholder)*
 
-![Scan single binary - OK](/images/2.png)
+![Scan single binary - OK](images/2.png)
 *Figure 2: `bicfm scan /bin/ls` showing an OK result (screenshot placeholder)*
 
-![Scan single binary - Violation](/images/3.png)
+![Scan single binary - Violation](images/3.png)
 *Figure 3: `bicfm scan /bin/cp` showing a VIOLATION (screenshot placeholder)*
 
-![Scan-dir summary](/images/4.png)
+![Scan-dir summary](images/4.png)
 *Figure 4: `bicfm scan-dir /bin` summary (screenshot placeholder)*
 
-![Show baseline](/images/5.png)
+![Show baseline](images/5.png)
 *Figure 5: `bicfm show /bin/ls` output (screenshot placeholder)*
 
 ```
