@@ -174,6 +174,5 @@ Place your screenshots in the `images/` folder and use these placeholders in the
 ## License & Author
 - Author: Aditya Pillai  
 - License: MIT
-
 ---
 
