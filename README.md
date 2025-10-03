@@ -162,10 +162,10 @@ Each entry keyed by the binary's `realpath` and contains:
 *Figure 5: `bicfm show /home/kali/Lab/Lab02/chat_server` 
 
 ![Update baseline](images/6.png)
-*Figure 5: `bicfm update /home/kali/Lab/Lab02/chat_server` 
+*Figure 6: `bicfm update /home/kali/Lab/Lab02/chat_server` 
 
 ![Analyze Database](images/7.png)
-*Figure 5: `bicfm analyze` 
+*Figure 7: `bicfm analyze` 
 
 
 ---
