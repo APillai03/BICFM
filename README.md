@@ -1,4 +1,4 @@
-# Binary Integrity & Control Flow Monitor (BICFM) — Part 1
+# Binary Integrity & Control Flow Monitor (BICFM)
 
 **bicfm** is a small CLI utility to build and verify a baseline for ELF binaries.  
 It stores a JSON baseline that includes SHA256, size, ELF section names/sizes and basic compiler metadata. Use it to detect tampering, suspicious changes, or integrity violations.
@@ -120,6 +120,13 @@ Each entry keyed by the binary's `realpath` and contains:
 
 # show baseline details
 ./bicfm.py show /bin/ls
+
+# update baseline entry
+./bicfm.py update /bin/ls
+
+# Analyze for suspicious sections
+./bicfm.py analyze --export report.json
+
 ```
 
 ---
@@ -141,6 +148,7 @@ Each entry keyed by the binary's `realpath` and contains:
 
 ![Init baseline screenshot](images/1.png)
 *Figure 1: `bicfm init /home/kali/Lab` output
+
 ![Scan single binary - OK](images/2.png)
 *Figure 2: `bicfm scan /home/kali/Lab/Lab02/chat_server` showing an OK result 
 
@@ -152,6 +160,12 @@ Each entry keyed by the binary's `realpath` and contains:
 
 ![Show baseline](images/5.png)
 *Figure 5: `bicfm show /home/kali/Lab/Lab02/chat_server` 
+
+![Update baseline](images/6.png)
+*Figure 5: `bicfm update /home/kali/Lab/Lab02/chat_server` 
+
+![Analyze Database](images/7.png)
+*Figure 5: `bicfm analyze` 
 
 
 ---

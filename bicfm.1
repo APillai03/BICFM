@@ -24,6 +24,13 @@ and basic compiler metadata. Use bicfm to detect tampering (hash mismatch), stru
 anomalies (section additions/removals/size changes), or metadata changes.
 .SH COMMANDS
 .TP
+.B update file
+Update or refresh the baseline entry for the given binary.
+.TP
+.B analyze [--export file]
+Analyze the baseline database for suspicious sections and anomalies.
+If --export is provided, results are written to a JSON file.
+.TP
 .B init \fIdir\fR
 Scan \fIdir\fR recursively for ELF binaries and build a baseline. The baseline is
 saved to the JSON file specified by \fI--db\fR (default: \fI./bicfm_db.json\fR).

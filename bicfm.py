@@ -273,6 +273,49 @@ def cmd_show(args):
     for s, sz in sorted(entry.get("sections", {}).items()):
         print(f"    {s:20} {sz} bytes")
     return 0
+def cmd_update(args):
+    db = load_db()
+    target = args.file
+    if not os.path.exists(target):
+        print(Fore.RED + "[ERROR]" + Style.RESET_ALL, f"{target} not found")
+        return 1
+    if not is_elf(target):
+        print(Fore.YELLOW + "[SUSPICIOUS]" + Style.RESET_ALL, f"{target} is not ELF")
+        return 1
+
+    real = os.path.realpath(target)
+    sha = sha256sum(target)
+    size = os.path.getsize(target)
+    meta = extract_elf_metadata(target)
+    entry = {
+        "path": target,
+        "realpath": real,
+        "sha256": sha,
+        "size": size,
+        "sections": meta.get("sections", {}),
+        "compiler": meta.get("compiler"),
+    }
+    db[real] = entry
+    save_db(db)
+    print(Fore.GREEN + "[OK]" + Style.RESET_ALL, f"Updated baseline for {target}")
+    return 0
+
+def cmd_analyze(args):
+    db = load_db()
+    results = []
+    for path, entry in db.items():
+        sus_sections = [s for s in entry["sections"] if "evil" in s or "mal" in s]
+        if sus_sections:
+            print(Fore.RED + "[VIOLATION]" + Style.RESET_ALL, f"{path} contains suspicious sections: {', '.join(sus_sections)}")
+            results.append({"path": path, "issue": "Suspicious sections", "sections": sus_sections})
+
+    if args.export:
+        with open(args.export, "w") as f:
+            json.dump(results, f, indent=2)
+        print(Fore.BLUE + "[INFO]" + Style.RESET_ALL, f"Report exported to {args.export}")
+    return 0
+
+
 
 # -----------------------
 # CLI wiring
@@ -296,6 +339,15 @@ def main():
     p_show = sub.add_parser("show", help="Show baseline info for a binary")
     p_show.add_argument("file", help="File to show")
     p_show.set_defaults(func=cmd_show)
+    
+    p_update = sub.add_parser("update", help="Update baseline for a binary")
+    p_update.add_argument("file", help="File to update baseline for")
+    p_update.set_defaults(func=cmd_update)
+
+    p_analyze = sub.add_parser("analyze", help="Analyze baseline for suspicious patterns")
+    p_analyze.add_argument("--export", help="Export report to JSON file")
+    p_analyze.set_defaults(func=cmd_analyze)
+
 
     args = parser.parse_args()
     if not hasattr(args, "func"):
